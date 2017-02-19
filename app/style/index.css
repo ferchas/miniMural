@@ -1,0 +1,5 @@
+/* Shared */
+
+/* Components */
+@import "../components/main/style/dashboard.css";
+@import "../components/stickyNote/style/stickyNote.css";

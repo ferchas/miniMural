@@ -5,6 +5,8 @@ import Header from './components/header/h_mural';
 import Main   from './components/main/m_dashboard';
 import Footer from './components/footer/f_mural';
 
+import styles from './style/index.css';
+
 class Root extends Component {
 
  constructor(props) {
