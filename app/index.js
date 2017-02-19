@@ -1,6 +1,10 @@
 import React, { Component }    from 'react';
 import ReactDOM                from 'react-dom';
 
+import Header from './components/header/h_mural';
+import Main   from './components/main/m_dashboard';
+import Footer from './components/footer/f_mural';
+
 class Root extends Component {
 
  constructor(props) {
@@ -9,10 +13,14 @@ class Root extends Component {
 
  render() {
    return (
-     <p>Hello World</p>
+     <div>
+        <Header />
+        <Main />
+        <Footer />
+      </div>
    );
  }
 }
 
 
-ReactDOM.render(<Root/>, document.getElementById('mainContainer'));
+ReactDOM.render(<Root/>, document.getElementById('mainLayout'));
