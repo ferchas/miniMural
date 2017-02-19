@@ -10,10 +10,8 @@ class Dashboard extends Component  {
   }
 
   addStickyNote() {
-
-    this.stickys.push(<StickyNoteSmall key={this.stickys.length} title='New Note'/>);
+    this.stickys.push(<StickyNoteSmall key={this.stickys.length} />);
     this.forceUpdate();
-    console.log(this.stickys);
   }
 
   handleDoubleClick() {
@@ -24,7 +22,7 @@ class Dashboard extends Component  {
 		return(
       <div className="dashboard" onDoubleClick={()=> this.handleDoubleClick ()}>
         {this.stickys}
-        <p>Double click to add a sticky</p>
+        <p>Double click to add a sticky note</p>
       </div>
 		);
 	}

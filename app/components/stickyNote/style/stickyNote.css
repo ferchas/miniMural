@@ -10,13 +10,25 @@
   border-radius: 10px 58px 12px 0px;
 }
 
-.sticky-note h2 {
+.sticky-note input[type=text] {
   font-size:22px;
   font-weight:bold;
-  padding-bottom:10px;
+  padding:10px;
+  border: none;
+  background: none;
+  width: 215px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.sticky-note p {
+.sticky-note textarea {
   font-family:"Reenie Beanie",arial,sans-serif;
   font-size:14px;
+  padding: 10px;
+  border: 0;
+  background: 0;
+  width: 100%;
+  height: 72%;
+  resize: none;
 }
