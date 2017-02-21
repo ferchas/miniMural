@@ -4,7 +4,11 @@ class Header extends Component  {
 	render(){
 		return(
 			<header>
-        <div>Sticky - Mural</div>
+				<div className="header-logo">
+					<a  href="/">
+						<img width="165" height="auto" className="header-logo" src="https://mural.co/public/assets/images/logo.svg" alt="Mural" />
+					</a>
+				</div>
       </header>
 		);
 	}

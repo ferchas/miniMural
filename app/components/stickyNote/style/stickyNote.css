@@ -32,3 +32,9 @@
   height: 72%;
   resize: none;
 }
+
+
+.sticky-note-selected {
+  box-shadow: 5px 5px 7px rgba(121, 32, 5, 0.62);
+  border-radius: 0;
+}
