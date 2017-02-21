@@ -35,6 +35,6 @@
 
 
 .sticky-note-selected {
-  box-shadow: 5px 5px 7px rgba(121, 32, 5, 0.62);
+  background-color: rgba(253, 154, 232, 0.53);
   border-radius: 0;
 }

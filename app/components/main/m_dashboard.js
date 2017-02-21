@@ -6,52 +6,65 @@ class Dashboard extends Component  {
 
   constructor(props) {
     super(props);
-    this.selectNote = [];
     this.toCopy = [];
     this.keyPressShift = false;
     this.state = {
       stickys: [],
     };
-    // set bin at function
-    this.selectMyNote = this.selectMyNote.bind(this);
   }
 
   addStickyNote() {
     this.setState({stickys: this.state.stickys.concat(
-      <StickyNoteSmall
-        key={this.state.stickys.length}
-        id={this.state.stickys.length + 1}
-        selectSN={this.selectNote}
-        selectMyNote={this.selectMyNote}
-      />)
-    });
+      {
+        id: this.state.stickys.length +1,
+        selected: false,
+        title: '',
+        note: '',
+      }
+    )});
   }
 
   selectMyNote(keyComp) {
-    if(!this.keyPressShift) {
-      this.selectNote = [keyComp];
-    } else if(!this.selectNote.find((e) => e === keyComp)) {
-      this.selectNote.push(keyComp);
-    }
+    const stickys = this.state.stickys.map((st, index) => {
+      if(!this.keyPressShift) {
+        st.selected = (index === (keyComp-1))? true: false;
+      }
+      else if(index === (keyComp-1)) {
+        // multimple select
+        st.selected = true;
+      }
+      return st;
+    });
+    this.setState({stickys: stickys});
+
   }
 
-  cloneStickyNote(){
-    const stickyNoteList = this.toCopy.map((e)=> {
-      return this.state.stickys[e -1];
+  changeText(e) {
+    let stickys = this.state.stickys;
+    stickys[e.id - 1].title = e.title;
+    stickys[e.id - 1].note = e.note;
+    this.setState({stickys: stickys});
+  }
+
+  toCopyNote() {
+    this.toCopy = this.state.stickys.filter((st) => {
+      return st.selected;
     });
-    
-    const newStick = stickyNoteList.map((child, index) => {
-      const keyComp = this.state.stickys.length +  index + 1;
-      const id = this.state.stickys.length + index + 1;
-      return React.cloneElement(child, {
-        key:keyComp,
-        id:id,
-        selectSN: this.selectNote,
-        selectMyNote:this.selectMyNote,
-      });
+
+  }
+
+  cloneStickyNote() {
+    let count = this.state.stickys.length;
+    let newSticky = [];
+    this.toCopy.forEach((e)=> {
+      const data_copy = JSON.parse(JSON.stringify(e));
+      count++;
+      data_copy.id = count;
+      newSticky.push(data_copy);
     });
-    console.log(newStick);
-    this.setState({stickys: this.state.stickys.concat(newStick)});
+    this.setState({stickys: this.state.stickys.concat(newSticky)});
+
+
   }
 
   // ---- Handle Events ----
@@ -59,18 +72,18 @@ class Dashboard extends Component  {
     this.addStickyNote();
   }
 
-  handleKeyDown(event) {
-    let charCode = String.fromCharCode(event.which).toLowerCase();
+  handleKeyDown(e) {
+    let charCode = String.fromCharCode(e.which).toLowerCase();
     // add to buff stycky that will be copied
-    if((event.ctrlKey || event.metaKey) && charCode === 'c') {
-      this.toCopy = this.selectNote;
+    if((e.ctrlKey || e.metaKey) && charCode === 'c') {
+      this.toCopyNote();
     }
     // copy Sticky note
-    if((event.ctrlKey || event.metaKey) && charCode === 'v') {
+    if((e.ctrlKey || e.metaKey) && charCode === 'v') {
       this.cloneStickyNote();
     }
     // code shift 16
-    if(event.which === 16) {
+    if(e.which === 16) {
       this.keyPressShift = true;
     }
   }
@@ -81,14 +94,26 @@ class Dashboard extends Component  {
 
 	render(){
 		return(
-      <div className="dashboard" tabIndex="1"
-        onDoubleClick={()=> this.handleDoubleClick ()}
-        onKeyDown={(event)=>this.handleKeyDown(event)}
-        onKeyUp={(event)=>this.handleKeyUp(event)}
-      >
-        {this.state.stickys}
-        <p>Double click to add a sticky note</p>
-      </div>
+        <div className="dashboard" tabIndex="1"
+          onDoubleClick={()=> this.handleDoubleClick ()}
+          onKeyDown={(event)=>this.handleKeyDown(event)}
+          onKeyUp={(event)=>this.handleKeyUp(event)}
+        >
+          {this.state.stickys.map((noteSt) =>{
+            return (
+              <StickyNoteSmall
+                key={noteSt.id}
+                id={noteSt.id}
+                selected={noteSt.selected}
+                title={noteSt.title}
+                note={noteSt.note}
+                selectMyNote={(e)=>this.selectMyNote(e)}
+                changeText={(e)=>this.changeText(e)}
+              />
+            );
+          })}
+          <p>Double click to add a sticky note</p>
+        </div>
 		);
 	}
 }

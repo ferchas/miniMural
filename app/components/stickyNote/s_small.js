@@ -4,20 +4,17 @@ class StickyNoteSmall extends Component  {
 
   constructor(props) {
     super(props);
-    this.idSelected = false ;
     this.state = {
-      title: '',
-      note: '',
+      id: this.props.id,
+      title: this.props.title,
+      note: this.props.note,
       disabled: 'disabled',
-      class: 'sticky-note',
     };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log("nextProps", nextProps);
-  }
+  // componentWillReceiveProps(nextProps){
+  //   console.log("nextProps", nextProps);
+  // }
 
   handleDoubleClick(e) {
    e.stopPropagation();
@@ -33,22 +30,25 @@ class StickyNoteSmall extends Component  {
   }
 
   handleMouseLeave(e) {
-     this.setState({disabled:'disabled'});
+    this.props.changeText({
+      title: this.state.title,
+      note: this.state.note,
+      id: this.state.id
+    });
+    this.setState({disabled:'disabled'});
   }
 
   handleClick(e) {
-    this.props.selectMyNote(this.props.id);
-    this.setState({class: 'sticky-note-selected sticky-note'});
-    // console.log("handleClick", this.props.selectSN);
+    this.props.selectMyNote(this.state.id);
   }
 
 
 	render(){
 		return(
 			<div
-        className={this.state.class}
+        className={this.props.selected ? 'sticky-note-selected sticky-note': 'sticky-note'}
         onDoubleClick={(event)=>this.handleDoubleClick(event)}
-        onClick={this.handleClick}
+        onClick={(event)=>this.handleClick(event)}
         onMouseLeave={(event)=>this.handleMouseLeave(event)}
         >
         <input type="text" placeholder='New Note'
