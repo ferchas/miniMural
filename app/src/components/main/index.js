@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import StickyNoteSmall from '../stickyNote/s_small';
+import StickyNoteSmall from '../stickyNote';
 
 class Dashboard extends Component  {
 

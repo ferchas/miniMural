@@ -1,0 +1,12 @@
+{
+  "app": {
+    "name": "miniMural",
+    "scope": "develop",
+    "port": 3000,
+    "portS": 8443
+  },
+  "web-pack": {
+    "public-path": "/dist",
+    "minimize-css": false
+  }
+}
