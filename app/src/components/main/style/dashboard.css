@@ -3,12 +3,12 @@
   display: block;
   min-height: 75%;
   outline: none;
-}
+  
+  p {
+    text-align: center;
+    font-size: 23px;
+    color: rgba(162, 156, 156, 0.84);
+    padding: 100px;
 
-.dashboard p {
-  text-align: center;
-  font-size: 23px;
-  color: rgba(162, 156, 156, 0.84);
-  padding: 100px;
-
+  }
 }

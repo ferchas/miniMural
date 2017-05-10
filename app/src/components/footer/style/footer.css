@@ -1,8 +1,8 @@
 footer {
     background-color: #f5f1f1;
-}
 
-footer p {
-  display: inline-block;
-  margin: 16px;
+  p {
+    display: inline-block;
+    margin: 16px;
+  }
 }
